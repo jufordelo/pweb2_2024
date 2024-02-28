@@ -5,24 +5,18 @@ use App\Models\Aluno;
 use Illuminate\Http\Request;
 class AlunoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
-    { return view("aluno.list");
+    { //app/http/controler
+        $dados=Aluno::all();
+       // dd($dados);
+        return view("aluno.list",["dados"=> $dados]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view("aluno.form");
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         Aluno::create(
@@ -30,7 +24,6 @@ class AlunoController extends Controller
             'telefone'=> $request->telefone,
             'cpf'=> $request->cpf,
             ] );
-
     }
 
     /**
@@ -62,6 +55,21 @@ class AlunoController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $dado = Aluno::findOrFail($id);
+        $dado->delete();
+        return redirect('aluno');
     }
+    public function search(Request $request)
+    {
+        if(! empty ($request->nome)){
+            $dados = Aluno::where(
+                "nome",
+                "like",
+                "%", $request->nome . "%"   )->get();
+        } else{
+            $dados=Aluno::all();
+        } //ds($dados)
+             return view("aluno.list",["dados"=> $dados]);
+    }
+
 }

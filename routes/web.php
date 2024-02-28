@@ -8,10 +8,12 @@ Route::get('/', function () {
 });
 
 //routes/web.php
-Route::get('/aluno', [AlunoController::class,"index"]);
+Route::get('/aluno',[AlunoController::class,"index"]);
 //carrega formulario
 Route::get('/aluno/create', [AlunoController::class,"create"]);
 //recebe os dados do formulario para ser salvo na função store
 Route::post('/aluno', [AlunoController::class,"store"])->name('aluno.store');
-
-
+//destruir/excluir
+Route::get('/aluno/destroy/{$id}', [AlunoController::class,"destroy"])->name('aluno.destroy');
+//pesquisa/buscar
+Route::post('/aluno/search', [AlunoController::class,"search"])->name('aluno.search');
