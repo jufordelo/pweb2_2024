@@ -7,9 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-
-
     <div>
+      <div>
+        @if ($errors->any())
+        <b> Por favor, verifique os dados abaixo:</b>
+        <ul>
+            @foreach ($errors->all() as $error )
+            <li>{{$error}}</li>
+            @endforeach
+        </ul>
+        @endif
+      </div>
+    </div>
     @yield('conteudo')
     </div>
 
