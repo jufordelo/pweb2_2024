@@ -3,22 +3,41 @@
 
 @php
     if(!empty($dado->id)){
+
     $route= route('aluno.update',$dado->id);
     }else{
       $route = route('aluno.store');
     }
 @endphp
-<form
- action= "{{route('aluno.store')}}" method="post">
-    @csrf
-    <label for=""> Nome</label>
-    <input type="text" name="nome" value="{{old('nome')}}"><br>
+<form action= "{{$route}}" method="post">
 
-    <label for="">Telefone</label>
-     <input type="text" name="telefone" value="{{old('telefone')}}"><br>
+    @csrf
+
+    @if (!empty($dado->id))
+    @method('put')
+
+    @endif
+
+    <input type="hidden" name="id"
+    value="@if (!empty($dado->id)) {{$dado->id}} @else{{''}} @endif"><br>
+
+
+    <label for=""> Nome</label> <br>
+    <input type="text" name="nome"  class="form-control"
+     value="@if(!empty ($dado->nome)){{$dado->nome}}
+     @elseif (!empty(old ('nome'))) {{old('nome')}} else{{""}} @endif"> <br>
+
+    <label for="">Telefone</label> <br>
+     <input type="text" name="telefone"  class="form-control"
+     value="@if(!empty ($dado->telefone)){{$dado->telefone}}
+     @elseif (!empty(old ('telefone'))) {{old('telefone')}} else{{""}} @endif"> <br>
+
 
     <label for="">CPF</label>
-    <input type="text" name="cpf"  value="{{old('cpf')}}"><br>
+    <input type="text" name="cpf"  class="form-control" 
+     value="@if(!empty ($dado->cpf)){{$dado->cpf}}
+     @elseif (!empty(old ('cpf'))) {{old('cpf')}} else{{""}} @endif"> <br>
+
 
     <button type="submit" > Salvar</button>
     <button><a href="{{url('aluno')}} ">Voltar</a></button>

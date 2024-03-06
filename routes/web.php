@@ -4,9 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AlunoController;
 
 Route::get('/', function () {
-    return view('welcome');
 });
-
+/*
 //routes/web.php
 Route::get('/aluno',[AlunoController::class,"index"]);
 //carrega formulario
@@ -22,8 +21,8 @@ Route::get('/aluno/edit/{id}', [AlunoController::class,"edit"])
 ->name('aluno.edit');
 Route::post('/aluno',
 [AlunoController::class,"update"])->name('aluno.update');
-
+*/
 //pesquisa/buscar
+Route::resource('aluno', AlunoController::class);
 Route::post('/aluno/search', [AlunoController::class,"search"])->name('aluno.search');
-
 

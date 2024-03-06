@@ -36,6 +36,9 @@ class AlunoController extends Controller
             'telefone'=> $request->telefone,
             'cpf'=> $request->cpf,
             ] );
+
+            return redirect('aluno');
+
     }
 
     /**
@@ -80,6 +83,8 @@ class AlunoController extends Controller
             'telefone'=> $request->telefone,
             'cpf'=> $request->cpf,
             ] );
+
+            return redirect('aluno');
     }
 
     /**
@@ -90,6 +95,7 @@ class AlunoController extends Controller
         $dado = Aluno::findOrFail($id);
        // dd($dado);
         $dado->delete();
+
         return redirect('aluno');
     }
     public function search(Request $request)
@@ -98,11 +104,12 @@ class AlunoController extends Controller
             $dados = Aluno::where(
                 "nome",
                 "like",
-                "%", $request->nome . "%" )->get();
+                "%". $request->nome . "%" )->get();
         } else{
             $dados=Aluno::all();
         } //dd($dados)
              return view("aluno.list",["dados"=> $dados]);
+
     }
 
 }
