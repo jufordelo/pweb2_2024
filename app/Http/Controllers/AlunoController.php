@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Aluno;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 class AlunoController extends Controller
 {
@@ -14,7 +15,8 @@ class AlunoController extends Controller
 
     public function create()
     {
-        return view("aluno.form");
+        $categorias= Categoria::all();
+        return view("aluno.form",['categorias'=>$categorias]);
     }
 
     public function store(Request $request)
@@ -55,7 +57,8 @@ class AlunoController extends Controller
     public function edit(string $id)
     {
      $dado= Aluno::findOrFail($id);
-     return view ("aluno.form",['dado'=>$dado]);
+     return view ("aluno.form",['dado'=>$dado,
+    'categorias'=>$categorias]);
     }
 
     /**
@@ -73,6 +76,7 @@ class AlunoController extends Controller
             'nome.max'=> "São permitidos 100 caracteres",
             'cpf.required'=> "O :attribute é obrigatório",
             'cpf.max'=> "São permitidos 16 caracteres",
+            'categoria_id.required'=> "O: attribute é obrigatório",
         ]);
 
 
@@ -82,8 +86,8 @@ class AlunoController extends Controller
             [ 'nome'=> $request->nome,
             'telefone'=> $request->telefone,
             'cpf'=> $request->cpf,
-            ] );
-
+            'categoria_id'=>$request->categoria_id,
+        ]);
             return redirect('aluno');
     }
 

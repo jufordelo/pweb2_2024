@@ -34,9 +34,19 @@
 
 
     <label for="">CPF</label>
-    <input type="text" name="cpf"  class="form-control" 
+    <input type="text" name="cpf"  class="form-control"
      value="@if(!empty ($dado->cpf)){{$dado->cpf}}
      @elseif (!empty(old ('cpf'))) {{old('cpf')}} else{{""}} @endif"> <br>
+
+
+<label for="">Categorias </label><br>
+
+     <select name="categoria_id" class="form-select">
+        @foreach ($categorias as $item )
+<option value="{{$item->id}}">{{$item->nome}}</option>
+        @endforeach
+     </select>
+
 
 
     <button type="submit" > Salvar</button>
