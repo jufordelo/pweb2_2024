@@ -20,4 +20,7 @@ class Aluno extends Model
     protected $casts=[
         'categoria_id'=>'integer'
     ];
+    public function categoria(){
+        return $this->belongsTo(Categoria::class, 'categoria_id');//tabela interior da relação
+    }
 }

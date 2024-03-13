@@ -1,6 +1,7 @@
 @extends('base')
 @section('conteudo')
 
+<h3> Formulário Aluno</h3>
 @php
     if(!empty($dado->id)){
 

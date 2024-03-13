@@ -30,6 +30,7 @@ class AlunoController extends Controller
             'nome.max'=> "São permitidos 100 caracteres",
             'cpf.required'=> "O :attribute é obrigatório",
             'cpf.max'=> "São permitidos 16 caracteres",
+            'categoria_id.required'=> "O: attribute é obrigatório",
         ]);
 
 
@@ -37,6 +38,7 @@ class AlunoController extends Controller
             [ 'nome'=> $request->nome,
             'telefone'=> $request->telefone,
             'cpf'=> $request->cpf,
+            'categoria_id'=>$request->categoria_id,
             ] );
 
             return redirect('aluno');

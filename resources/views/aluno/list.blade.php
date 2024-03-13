@@ -1,14 +1,25 @@
 @extends('base')
 @section('conteudo')
 @section('titulo' , "Formulario Aluno")
-<form action="{{route('aluno.search')}}" method="post">
-    @csrf
-    <label for=""> Nome</label>
-    <input type="text" name="nome"><br>
-    <button type="submit">Buscar</button>
-    <button><a href="{{url('aluno/create')}}">Novo</a></button>
 
+
+
+<h3> Listagem Aluno </h3>
+<form action="{{route('aluno.search')}}" method="post">
+    <div class="row">
+        @csrf
+        <div class= "col-4">
+            <label for="">Nome</label><br>
+            <input type="text" name="nome" class="form-control"><br>
+        </div>
+        <div class="col-4" style="">
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass">
+                </i> Buscar</button>
+           <a href="{{url('aluno/create')}}" class="btn btn-success"><i class="fa-regular fa-address-book"></i> Novo</a>
+        </div>
+    </div>
 </form>
+
     <hr>
     <table class="table table-striped">
         <thead>
@@ -16,6 +27,8 @@
                     <th>Nome</th>
                     <th>Telefone</th>
                     <th>Cpf</th>
+                    <th>Categoria</th>
+                    <th colspan="2">Ações</th>
                     <th colspan="2">Ações</th>
             </tr>
         </thead>
@@ -26,6 +39,7 @@
                 <td>{{$item->nome}}</td>
                 <td>{{$item->telefone}}</td>
                 <td>{{$item->cpf}}</td>
+                <td>{{$item->categoria->nome ?? ""}}</td>
                 <td>Editar</td>
                 <td><a href="{{route('aluno.edit', $item->id)}}"> Editar </a></td>
 
